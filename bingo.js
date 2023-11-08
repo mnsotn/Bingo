@@ -1,9 +1,5 @@
 // Copyright 2020 Chris Bovitz mnsotn@yahoo.com
 
-// Improvements:
-//   
-//   Include check box for blackout/coverall 
-
 var header = new Array ('B', 'I', 'N', 'G', 'O');
 var gridRows = header.length;
 var gridCols = 15;
@@ -29,8 +25,8 @@ function OnClick (table)
                 var colIndex = c.target.cellIndex;
                 if (! isFreeSpace (this))
                 {
-                    PickAction (this, rowIndex, colIndex);
-                    if (c.target.classList.contains("pick"))
+                    CoverAction (this, rowIndex, colIndex);
+                    if (c.target.classList.contains("cover"))
                         CheckForBingo(table, rowIndex-1, colIndex);
                 }
                 lastClickedRow = rowIndex-1;
@@ -43,8 +39,8 @@ function OnClick (table)
                 var colIndex = c.target.cellIndex;
                 if (! isFreeSpace (this))
                 {
-                    PickAction (this, rowIndex, colIndex);
-                    if (c.target.classList.contains("pick"))
+                    CoverAction (this, rowIndex, colIndex);
+                    if (c.target.classList.contains("cover"))
                         CheckForBingo(table, rowIndex-1, colIndex);
                 }
                 lastClickedRow = rowIndex-1;
@@ -59,14 +55,14 @@ function isFreeSpace (cell)
 	return (cell.innerHTML == freeSpaceText);
 }
 
-function PickAction (cell, row, col)
+function CoverAction (cell, row, col)
 {
     if (cell.innerHTML != freeSpaceText)
     {
-        if (cell.classList.contains("pick"))
-            cell.classList.remove("pick");
+        if (cell.classList.contains("cover"))
+            cell.classList.remove("cover");
         else
-            cell.classList.add("pick");
+            cell.classList.add("cover");
     }
 }
 
@@ -145,7 +141,7 @@ function CreateCard (tableId)
             {
                 newCell.innerHTML = freeSpaceText;
                 newCell.classList.add("freeSpace");
-                newCell.classList.add("pick");
+                newCell.classList.add("cover");
             }
         }
     }
@@ -165,26 +161,26 @@ function Index (r,c)
 
 function PickBall (table)
 {
-    var pickedBalls = document.getElementsByClassName("pick");
-    if (pickedBalls.length == numBalls)
+    var coveredBalls = document.getElementsByClassName("cover");
+    if (coveredBalls.length == numBalls)
     {
         alert ("No more balls!");
         return;
     }
 
     var ballNumber = Math.floor (Math.random() * (numBalls)) + 1;
-    var picked = document.getElementsByClassName(BallClass(ballNumber));
-    if (picked.length != 1)
+    var covered = document.getElementsByClassName(BallClass(ballNumber));
+    if (covered.length != 1)
     {
         alert("Try again");
         return;
     }
 
-    while (picked[0].classList.contains("pick"))
+    while (covered[0].classList.contains("cover"))
     {
         ballNumber = Math.floor (Math.random() * (numBalls)) + 1;
-        picked = document.getElementsByClassName(BallClass(ballNumber));
-        if (picked.length != 1)
+        covered = document.getElementsByClassName(BallClass(ballNumber));
+        if (covered.length != 1)
         {
             alert("Try again");
             return;
@@ -193,7 +189,7 @@ function PickBall (table)
 
     var row = header[Math.floor ((ballNumber - 1) / gridCols)];
     alert(row+" "+ballNumber);
-    picked[0].classList.add("pick");
+    covered[0].classList.add("cover");
 }
 
 function ClearGrid (table)
@@ -210,9 +206,9 @@ function ClearCard (table)
 
 function ClearIt (table)
 {
-    var picked = document.getElementsByClassName("pick");
-    for (var i = picked.length-1; i >= 0; i--)
-        picked[i].classList.remove("pick");
+    var covered = document.getElementsByClassName("cover");
+    for (var i = covered.length-1; i >= 0; i--)
+        covered[i].classList.remove("cover");
 }
 
 function sleep(ms) {
@@ -235,7 +231,7 @@ async function CheckForBingo (table, r0, c0)
     if (blackout)
     {
 		sleep(200);
-        if (document.getElementsByClassName("pick").length == (cardRows * cardCols))
+        if (document.getElementsByClassName("cover").length == (cardRows * cardCols))
         {
             alert ("YOU'VE GOT A BLACKOUT!")
             return true;
@@ -254,7 +250,7 @@ async function CheckForBingo (table, r0, c0)
             {
                 for (c = 1; c <= cardCols; c += (cardCols-1))
                 {
-                    if (document.getElementById(Index(r,c)).classList.contains("pick"))
+                    if (document.getElementById(Index(r,c)).classList.contains("cover"))
                         count++;
                 }
             }
@@ -275,7 +271,7 @@ async function CheckForBingo (table, r0, c0)
                     c = r
                 else
                     c = ((cardRows + 1) - r)
-                if ((document.getElementById(Index(r,c)).classList.contains("pick")) ||
+                if ((document.getElementById(Index(r,c)).classList.contains("cover")) ||
                     (document.getElementById(Index(r,c)).innerHTML == freeSpaceText))
                     count++;
             }
@@ -291,7 +287,7 @@ async function CheckForBingo (table, r0, c0)
             // Check row
             for (c = 1; c <= cardCols; c++)
             {
-                if ((document.getElementById(Index(r1,c)).classList.contains("pick")) ||
+                if ((document.getElementById(Index(r1,c)).classList.contains("cover")) ||
                     (document.getElementById(Index(r1,c)).innerHTML == freeSpaceText))
                     count++;
             }
@@ -307,7 +303,7 @@ async function CheckForBingo (table, r0, c0)
             // Check column
             for (r = 1; r <= cardRows; r++)
             {
-                if ((document.getElementById(Index(r,c1)).classList.contains("pick")) ||
+                if ((document.getElementById(Index(r,c1)).classList.contains("cover")) ||
                     (document.getElementById(Index(r,c1)).innerHTML == freeSpaceText))
                     count++;
             }
@@ -328,7 +324,7 @@ function GameType ()
 {
     var h;
 
-    if (document.getElementsByClassName("pick").length > 1)  // free space is always picked
+    if (document.getElementsByClassName("cover").length > 1)  // free space is always covered
     {
         if (! confirm("You've already started a game.\nAre you sure you want to change?"))
             return;
