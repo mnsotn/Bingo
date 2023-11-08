@@ -1,0 +1,72 @@
+/* Copyright 2020 Chris Bovitz mnsotn@yahoo.com */
+
+body {
+    font-family: sans-serif;
+}
+h1 {
+    text-align: center;
+}
+table {
+    margin-left: auto; 
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.B { background-color: #ffc0ff; }
+.I { background-color: #ffa0a0; }
+.N { background-color: #a0ffff; }
+.G { background-color: #ffffa0; }
+.O { background-color: #a0ff00; }
+
+td {
+    margin: 0px;
+    text-align: center;
+    width: 3em;
+    height: 3em;
+    border: 1px solid #000000;
+}
+
+th {
+    text-align: center;
+    width: 3em;
+    height: 3em;
+    border: 1px solid #000000;
+}
+
+.pick {
+    color: #ffffff;
+    background-color: #000000;
+    border: 1px solid #ffffff;
+}
+.buttonContainer {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.button {
+    color: #ffffff;
+    background-color: #000000;
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+}
+.freeSpace {
+    font-size: 75%;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+.bingo {
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
+.blackout {
+    color: #ffffff;
+    background-color: #000000;
+    border: 1px solid #ffffff;
+}
+
+.copyright {
+    color: #ffffff;
+}

@@ -1,0 +1,26 @@
+<!-- Copyright 2020 Chris Bovitz mnsotn@yahoo.com -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="utf-8" http-equiv="encoding"/>
+    <title>We're Playing Bingo!</title>
+    <link rel="stylesheet" type="text/css" href="bingo.css"/>
+    <script type="text/javascript" src="bingo.js"></script>
+</head>
+<body onload="CreateGrid('grid')">
+
+<h1>We're Playing Bingo!</h1>
+
+<table id="grid">
+</table>
+
+<div class="buttonContainer">
+    <div class="button" onClick="PickBall('grid');">Pick a ball</div>
+    <div class="button" onClick="ClearGrid('grid');">Clear the board</div>
+    <br/>
+    <div class="button" onClick="window.open('bingocard.html');">Create a card</div>
+</div>   
+<p class="copyright">(c)2020 Chris Bovitz. All rights reserved</p>
+</body>
+</html>
